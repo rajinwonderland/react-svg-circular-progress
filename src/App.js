@@ -1,31 +1,39 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-import './App.css';
-import ProgressBar from './components/ProgressBar/ProgressBar';
+import "./App.css";
+import ProgressBar from "./components/ProgressBar/ProgressBar";
 
 const App = () => {
   const [progress, setProgress] = useState(0);
-  const [color, setColor] = useState('');
-  const colorArray = ['#7ea9e1', "#ed004f", "#00fcf0", "#d2fc00", "#7bff00", "#fa6900"];
+  const [color, setColor] = useState("");
+  const colorArray = [
+    "#7ea9e1",
+    "#ed004f",
+    "#00fcf0",
+    "#d2fc00",
+    "#7bff00",
+    "#fa6900"
+  ];
 
   const randomColor = () => {
     return colorArray[Math.floor(Math.random() * colorArray.length)];
-  }
+  };
 
   const randomProgressValue = () => {
     const progressValue = Math.floor(Math.random() * 101);
     setProgress(progressValue);
     const randomProgressColor = randomColor();
     setColor(randomProgressColor);
-  }
+  };
 
-  const onChange = e => {
+  const onChange = (e) => {
     if (e.target.value) {
+      let progress = e.target.value;
       if (e.target.value > 100) {
         progress = 100;
       }
       if (e.target.value < 0) {
-          progress = 0;
+        progress = 0;
       }
       setProgress(progress);
       const randomProgressColor = randomColor();
@@ -33,17 +41,17 @@ const App = () => {
     } else {
       setProgress(0);
     }
-  }
+  };
 
   return (
     <div className="app">
       <div className="app-header">
         <h1>SVG Circle Progress</h1>
-        <ProgressBar 
+        <ProgressBar
           progress={progress}
           size={500}
           strokeWidth={15}
-          circleOneStroke='#d9edfe'
+          circleOneStroke="#d9edfe"
           circleTwoStroke={color}
         />
         <p>
@@ -54,12 +62,10 @@ const App = () => {
             onChange={onChange}
           />
         </p>
-        <button onClick={randomProgressValue}>
-          Random
-        </button>
+        <button onClick={randomProgressValue}>Random</button>
       </div>
     </div>
   );
-}
+};
 
 export default App;
